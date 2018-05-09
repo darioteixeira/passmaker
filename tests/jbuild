@@ -3,7 +3,7 @@
 (executables
     (
     (names (test_prelude test_phrase test_word))
-    (libraries (alcotest cmdliner hex passmaker rresult))
+    (libraries (alcotest hex passmaker rresult))
     (preprocess (pps (ppx_deriving.show ppx_deriving.eq)))
     ))
 
