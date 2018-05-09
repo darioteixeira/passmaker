@@ -10,12 +10,12 @@ open Passmaker
 open Phrase
 
 let random_bytes () =
-	let len = 8 in
-	let buf = Bytes.create len in
-	let chan = open_in_bin "/dev/urandom" in
-	really_input chan buf 0 len;
-	close_in chan;
-	buf
+    let len = 8 in
+    let buf = Bytes.create len in
+    let chan = open_in_bin "/dev/urandom" in
+    really_input chan buf 0 len;
+    close_in chan;
+    buf
 
 let () = match Hexa.of_bytes @@ random_bytes () with
     | Ok hexa ->

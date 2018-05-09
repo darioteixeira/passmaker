@@ -11,7 +11,7 @@ open Word
 
 
 (********************************************************************************)
-(**	{1 Definitions about the internal representation of phrases}	            *)
+(** {1 Definitions about the internal representation of phrases}                *)
 (********************************************************************************)
 
 module Internal:
@@ -42,7 +42,7 @@ end
 
 
 (********************************************************************************)
-(**	{1 Definitions about the external (user-visible) representation of phrases} *)
+(** {1 Definitions about the external (user-visible) representation of phrases} *)
 (********************************************************************************)
 
 module type EXTERNAL =

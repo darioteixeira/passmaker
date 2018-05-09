@@ -38,7 +38,7 @@ end
 
 
 (********************************************************************************)
-(*	{1 Miscelaneous utility functions}											*)
+(*  {1 Miscelaneous utility functions}                                          *)
 (********************************************************************************)
 
 let string_or_stdin = function
@@ -82,18 +82,18 @@ let transform_result = function
     | Error err -> Error (sprint_error err)
 
 let random_bytes size =
-	let len = match size with Size.S32 -> 4 | Size.S64 -> 8 in
-	let buf = Bytes.create len in
-	let chan = open_in_bin "/dev/urandom" in
-	really_input chan buf 0 len;
-	close_in chan;
-	buf
+    let len = match size with Size.S32 -> 4 | Size.S64 -> 8 in
+    let buf = Bytes.create len in
+    let chan = open_in_bin "/dev/urandom" in
+    really_input chan buf 0 len;
+    close_in chan;
+    buf
 
 let common_doc = "If the command line parameter is not present, the value is read from stdin instead."
 
 
 (********************************************************************************)
-(*	{1 Commands}																*)
+(*  {1 Commands}                                                                *)
 (********************************************************************************)
 
 let text_of_hex_cmd =
@@ -105,15 +105,15 @@ let text_of_hex_cmd =
         Text.of_internal >>|
         Text.to_string |>
         transform_result in
-	let term =
-		let hexa =
+    let term =
+        let hexa =
             let doc = "Hexadecimal representation of passphrase (either 8 or 16 characters long). " ^ common_doc in
             Arg.(value @@ pos 0 (some string) None @@ info [] ~docv:"HEX" ~doc) in
-		Term.(const text_of_hex $ hexa) in
-	let info =
-		let doc = "Convert hexadecimal representation to text passphrase." in
-		Term.info ~doc "text-of-hex" in
-	(term, info)
+        Term.(const text_of_hex $ hexa) in
+    let info =
+        let doc = "Convert hexadecimal representation to text passphrase." in
+        Term.info ~doc "text-of-hex" in
+    (term, info)
 
 let hex_of_text_cmd =
     let hex_of_text text =
@@ -124,34 +124,34 @@ let hex_of_text_cmd =
         Hexa.of_internal >>|
         Hexa.to_string |>
         transform_result in
-	let term =
-		let text =
+    let term =
+        let text =
             let doc = "Text passphrase (either 32-bit or 64-bit variant). " ^ common_doc in
             Arg.(value @@ pos 0 (some string) None @@ info [] ~docv:"PHRASE" ~doc) in
-		Term.(const hex_of_text $ text) in
-	let info =
-		let doc = "Convert text phrase to hexadecimal representation." in
-		Term.info ~doc "hex-of-text" in
-	(term, info)
+        Term.(const hex_of_text $ text) in
+    let info =
+        let doc = "Convert text phrase to hexadecimal representation." in
+        Term.info ~doc "hex-of-text" in
+    (term, info)
 
 let generate_cmd =
     let generate size =
-		let open Rresult in
-		random_bytes size |>
+        let open Rresult in
+        random_bytes size |>
         Hexa.of_bytes >>|
         Hexa.to_internal >>|
         Text.of_internal >>|
         Text.to_string |>
         transform_result in
-	let term =
-		let size =
-			let doc = "Entropy length in bits of the generated passphrase. Either 32 or 64." in
+    let term =
+        let size =
+            let doc = "Entropy length in bits of the generated passphrase. Either 32 or 64." in
             Arg.(value @@ opt Size.conv Size.S64 @@ info ["s"; "size"] ~docv:"SIZE" ~doc) in
-		Term.(const generate $ size) in
-	let info =
-		let doc = "Generate a fresh text passphrase." in
-		Term.info ~doc "generate" in
-	(term, info)
+        Term.(const generate $ size) in
+    let info =
+        let doc = "Generate a fresh text passphrase." in
+        Term.info ~doc "generate" in
+    (term, info)
 
 let abbreviate_cmd =
     let abbreviate text =
@@ -160,15 +160,15 @@ let abbreviate_cmd =
         Text.of_string >>|
         Text.to_abbr_string |>
         transform_result in
-	let term =
-		let text =
+    let term =
+        let text =
             let doc = "Text passphrase (either 32-bit or 64-bit variant). " ^ common_doc in
             Arg.(value @@ pos 0 (some string) None @@ info [] ~docv:"TEXT" ~doc) in
-		Term.(const abbreviate $ text) in
-	let info =
-		let doc = "Abbreviate text passphrase." in
-		Term.info ~doc "abbreviate" in
-	(term, info)
+        Term.(const abbreviate $ text) in
+    let info =
+        let doc = "Abbreviate text passphrase." in
+        Term.info ~doc "abbreviate" in
+    (term, info)
 
 let expand_cmd =
     let expand text =
@@ -177,31 +177,31 @@ let expand_cmd =
         Text.of_abbr_string >>|
         Text.to_string |>
         transform_result in
-	let term =
-		let text =
+    let term =
+        let text =
             let doc = "Abbreviated passphrase (either 32-bit or 64-bit variant). " ^ common_doc in
             Arg.(value @@ pos 0 (some string) None @@ info [] ~docv:"ABBR" ~doc) in
-		Term.(const expand $ text) in
-	let info =
-		let doc = "Expand abbreviated phrase into text passphrase." in
-		Term.info ~doc "expand" in
-	(term, info)
+        Term.(const expand $ text) in
+    let info =
+        let doc = "Expand abbreviated phrase into text passphrase." in
+        Term.info ~doc "expand" in
+    (term, info)
 
 let default_cmd =
-	let term = Term.(ret (pure (`Help (`Pager, None)))) in
-	let info =
-		let doc = "Utility for generating memorable passphrases." in
-		Term.info ~version:"1.0rc1" ~doc "passmakercmd" in
-	(term, info)
+    let term = Term.(ret (pure (`Help (`Pager, None)))) in
+    let info =
+        let doc = "Utility for generating memorable passphrases." in
+        Term.info ~version:"1.0rc1" ~doc "passmakercmd" in
+    (term, info)
 
 let cmds =
-	[
-	text_of_hex_cmd;
-	hex_of_text_cmd;
-	generate_cmd;
+    [
+    text_of_hex_cmd;
+    hex_of_text_cmd;
+    generate_cmd;
     abbreviate_cmd;
     expand_cmd;
-	]
+    ]
 
 let () = match Term.eval_choice default_cmd cmds with
     | `Version | `Help -> exit 0
