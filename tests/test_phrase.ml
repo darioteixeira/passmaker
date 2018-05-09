@@ -212,6 +212,31 @@ end
 
 
 (********************************************************************************)
+(** {1 Tests for both modules}                                                  *)
+(********************************************************************************)
+
+module Test_Both =
+struct
+    let test_well_known () =
+        let run (hexa, text) =
+            let text' = Rresult.(hexa |> Hexa.of_string |> R.get_ok |> Hexa.to_internal |> Text.of_internal |> Text.to_string) in
+            Alcotest.(check string hexa text text') in
+        List.iter run
+            [
+            ("00000000", "Abandoned aardvark from Aachen");
+            ("ffffffff", "Zesty zucchini from Zurich");
+            ("0000000000000000", "Abandoned aardvark abandons abandoned aardvark from Aachen");
+            ("ffffffffffffffff", "Zesty zucchini wrestles zesty zucchini from Zurich");
+            ]
+
+    let testset =
+        [
+        ("well-known", `Quick, test_well_known);
+        ]
+end
+
+
+(********************************************************************************)
 (** {1 Main}                                                                    *)
 (********************************************************************************)
 
@@ -219,4 +244,5 @@ let () = Alcotest.run "Phrase module"
     [
     ("Hexa", Test_Hexa.testset);
     ("Text", Test_Text.testset);
+    ("Both", Test_Both.testset);
     ]
