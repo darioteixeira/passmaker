@@ -3,3 +3,4 @@ passmaker.install
 passmakercmd.install
 src_cmd/.merlin
 src_lib/.merlin
+tests/.merlin
