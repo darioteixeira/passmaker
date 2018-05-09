@@ -57,7 +57,7 @@ All word lists obey the following rules:
 
  - No two words **within the same category** may share the same four-letter
    prefix. This follows the same convention as
-   [Bitcoin BIP-39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki),
+   [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki),
    and allows the passphrase to be stored on devices such as [Cryptosteel](https://cryptosteel.com/).
 
 Furthermore, special considerations were taken for each word category:
