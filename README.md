@@ -150,7 +150,7 @@ text passphrase into its hexadecimal or abbreviated form. Therefore, the
 following invocations all produce the same output:
 
 ```
-$ passmakercmd hex-of-text ""bsurd pirate dislikes hidden lottery Madrid
+$ passmakercmd hex-of-text "Absurd pirate dislikes hidden lottery Madrid"
 
 8aa0b31738aa600b
 
