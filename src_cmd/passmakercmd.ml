@@ -191,7 +191,7 @@ let default_cmd =
     let term = Term.(ret (pure (`Help (`Pager, None)))) in
     let info =
         let doc = "Utility for generating memorable passphrases." in
-        Term.info ~version:"1.0rc1" ~doc "passmakercmd" in
+        Term.info ~version:"1.0" ~doc "passmakercmd" in
     (term, info)
 
 let cmds =
