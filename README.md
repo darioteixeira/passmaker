@@ -48,7 +48,7 @@ The entropy contribution from each word category is as follows:
 
 All word lists obey the following rules:
 
- - No word must be more than ten characters in length.
+ - No word may be more than ten characters in length.
 
  - The edit distance between any two words **within the same category** must be
    at least **two** using the Levenshtein-Damerau measure.  This enables the
@@ -82,7 +82,7 @@ Furthermore, special considerations were taken for each word category:
 Installation
 ------------
 
-The passmaker library and associated command line utility are available in
+The Passmaker library and associated command line utility are available in
 [OPAM](https://opam.ocaml.org/).  Just install packages `passmaker` and
 `passmakercmd`, respectively.
 
