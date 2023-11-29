@@ -1,11 +1,3 @@
-(********************************************************************************)
-(*  Gen.ml
-    Copyright (c) 2018 Dario Teixeira <dario.teixeira@nleyten.com>
-    This software is distributed under the terms of the ISC license.
-    See LICENSE file for full license text.
-*)
-(********************************************************************************)
-
 open Passmaker
 open Phrase
 

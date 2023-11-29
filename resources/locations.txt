@@ -1,5 +1,5 @@
 # List of 1024 locations.
-# Copyright (c) 2018 Dario Teixeira <dario.teixeira@nleyten.com>
+# Copyright (c) 2018 Dario Teixeira <dario.teixeira@yahoo.com>
 # This list is distributed under the terms of the ISC license.
 # See LICENSE file for full license text.
 
